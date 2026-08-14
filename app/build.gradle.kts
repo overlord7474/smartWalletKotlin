@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -39,6 +40,12 @@ android {
 
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
+    val roomVersion = "2.7.2"
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation("androidx.datastore:datastore-preferences:1.2.1")
+    ksp("androidx.room:room-compiler:$roomVersion")
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
