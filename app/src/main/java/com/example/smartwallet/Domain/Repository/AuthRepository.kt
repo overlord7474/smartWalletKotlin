@@ -5,13 +5,15 @@ import com.example.smartwallet.Domain.Models.User
 interface AuthRepository {
 
     suspend fun login(
-        name: String,
-        income: Double
-    ): User
+        User : User
+    )
 
+    suspend fun register(
+        User : User
+    )
 
     suspend fun getCurrentUser(): User?
 
 
-    suspend fun logout()
+    suspend fun logout() : Boolean
 }
