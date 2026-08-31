@@ -28,13 +28,12 @@ interface UserDao {
     @Query(
         """
         SELECT * FROM users
-        WHERE name = :name AND monthlyIncome = :monthlyIncome
+        WHERE name = :name
         LIMIT 1
         """
     )
     suspend fun getUserByCredentials(
-        name: String,
-        monthlyIncome: Double
+        name: String
     ): UserEntity?
 
 }
