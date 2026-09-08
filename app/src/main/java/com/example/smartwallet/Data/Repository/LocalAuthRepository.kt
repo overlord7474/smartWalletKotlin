@@ -1,11 +1,11 @@
 package com.example.smartwallet.Data.Repository
 
-import com.example.smartwallet.Domain.Models.User
-import com.example.smartwallet.Domain.Repository.AuthRepository
 import com.example.smartwallet.Data.Datastore.UserSession
-import data.local.dao.UserDao
 import com.example.smartwallet.Data.Mapper.toEntity
 import com.example.smartwallet.Data.Mapper.toUser
+import com.example.smartwallet.Domain.Models.User
+import com.example.smartwallet.Domain.Repository.AuthRepository
+import data.local.dao.UserDao
 
 class LocalAuthRepository(
     private val userSession: UserSession,
@@ -14,10 +14,10 @@ class LocalAuthRepository(
 
     override suspend fun login(user: User): Result<Unit> {
         return try {
-            val foundUser = userDao.getUserByCredentials(user.name)
-                ?: return Result.failure(Exception("User not found"))
+            val foundUser = userDao.getUserByCredentials(user.name) ?: return Result.failure(Exception("User not found"))
 
             userSession.saveUserId(foundUser.id.toLong())
+
             Result.success(Unit)
         } catch (e: Exception) {
             if (e is kotlinx.coroutines.CancellationException) throw e
